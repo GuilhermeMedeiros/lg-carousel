@@ -58,8 +58,8 @@ export default class Carousel {
 
     delegateEvents(){
         document.addEventListener('keydown', (e) => {
-            if(e.which === 39) return this.moveNext();
-            if(e.which === 37) return this.movePrev();
+            if(e.which === 39) return this.moveNext(e);
+            if(e.which === 37) return this.movePrev(e);
         })
 
         this.el.addEventListener('mousemove', (e) => {

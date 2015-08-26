@@ -13,7 +13,7 @@ fetch('http://lg-devtest.herokuapp.com/data.json', {headers: {Authorization: 'Be
     // filter and sort movies from collections
     .then(function(responseObj){
         return responseObj.data
-            // get movies from both collections
+            // get movies from all collections
             .reduce(function(assets, collection){
                 return assets.concat(collection.assets);
             }, [])
@@ -23,13 +23,12 @@ fetch('http://lg-devtest.herokuapp.com/data.json', {headers: {Authorization: 'Be
             })
             // sort by imdb note
             .sort(function(movie1, movie2){
-                return movie1.imdb < movie2.imdb;
+                return movie2.imdb - movie1.imdb;
             })
     })
     // add carousel to the page
     .then(function(movies){
         let carousel = new Carousel({
-            width: $app.offsetWidth,
             items: movies,
             perRow: 3
         });
@@ -39,5 +38,5 @@ fetch('http://lg-devtest.herokuapp.com/data.json', {headers: {Authorization: 'Be
 
     // if api is not available, show a simple error message
     .catch(function(err){
-        $app.innerHTML = `<div class="error-message">${err.message}</div>`;
+        $app.innerHTML = err.message;
     })

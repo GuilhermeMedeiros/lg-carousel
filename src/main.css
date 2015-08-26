@@ -3,9 +3,3 @@ body {
     background: #eee;
     margin: 0;
 }
-
-.error-message {
-    padding: 5px;
-    background: red;
-    color: #fff;
-}
