@@ -1,4 +1,5 @@
 .carousel {
+    position: relative;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -42,3 +43,25 @@
     bottom: 0;
     right: 0;
 }
+
+
+.carousel__navigation button {
+    position: absolute;
+    width: 50px;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .8);
+    color: #fff;
+    font-size: 30px;
+    border: 0;
+    outline: none;
+    opacity: 0;
+    cursor: default;
+    transition: opacity 500ms ease;
+}
+
+.carousel__navigation .carousel__navigationLeft {left: 0;}
+.carousel__navigation .carousel__navigationRight {right: 0;}
+
+.carousel__navigation.has-prev-highlighted .carousel__navigationLeft {opacity: 1; cursor: pointer;}
+.carousel__navigation.has-next-highlighted .carousel__navigationRight {opacity: 1; cursor: pointer;}

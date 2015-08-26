@@ -1,5 +1,5 @@
 import 'normalize.css'
-import './styles/global.css'
+import './main.css'
 import Carousel from './components/carousel'
 
 const $app = document.getElementById('app');
