@@ -11,9 +11,5 @@ module.exports = {
             {test: /\.css$/, loader: 'style!css'},
             {test: /\.js?$/, loader: 'babel', exclude: /(node_modules)/}
         ]
-    },
-
-    devServer: {
-       hot: true
-   }
+    }
 };
