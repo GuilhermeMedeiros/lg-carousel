@@ -1,0 +1,9 @@
+body {
+    font-family: Tahoma, Verdana, sans-serif;
+}
+
+.error-message {
+    padding: 5px;
+    background: red;
+    color: #fff;
+}
