@@ -1,9 +1,9 @@
-import 'normalize.css'
 import './main.css'
 import Carousel from './components/carousel'
 
 const $app = document.getElementById('app');
 
+// get data from api
 fetch('http://lg-devtest.herokuapp.com/data.json', {headers: {Authorization: 'Bearer u12A8f3Zg'}})
     // convert response to json
     .then(function(response){

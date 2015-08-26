@@ -12,7 +12,6 @@
   "author": "Guilherme Medeiros <eu@guilhermemedeiros.com.br> (http://www.guilhermemedeiros.com.br/)",
   "license": "ISC",
   "dependencies": {
-    "normalize.css": "^3.0.3"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",
