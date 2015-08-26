@@ -1,0 +1,14 @@
+{
+  "name": "lg-carousel",
+  "version": "1.0.0",
+  "description": "A carousel component that displays IMDB movies",
+  "main": "src/main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Guilherme Medeiros <eu@guilhermemedeiros.com.br> (http://www.guilhermemedeiros.com.br/)",
+  "license": "ISC"
+}
