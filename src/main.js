@@ -5,10 +5,12 @@ import Carousel from './components/carousel'
 const $app = document.getElementById('app');
 
 fetch('http://lg-devtest.herokuapp.com/data.json', {headers: {Authorization: 'Bearer u12A8f3Zg'}})
+    // convert response to json
     .then(function(response){
         if(response.status === 403) throw new Error(response.statusText);
         return response.json();
     })
+    // filter and sort movies from collections
     .then(function(responseObj){
         return responseObj.data
             // get movies from both collections
@@ -24,10 +26,18 @@ fetch('http://lg-devtest.herokuapp.com/data.json', {headers: {Authorization: 'Be
                 return movie1.imdb < movie2.imdb;
             })
     })
+    // add carousel to the page
     .then(function(movies){
-        console.log(movies)
+        let carousel = new Carousel({
+            width: $app.offsetWidth,
+            items: movies,
+            perRow: 3
+        });
+
+        $app.appendChild(carousel.render().el)
     })
+
+    // if api is not available, show a simple error message
     .catch(function(err){
-        console.log(err)
         $app.innerHTML = `<div class="error-message">${err.message}</div>`;
     })
