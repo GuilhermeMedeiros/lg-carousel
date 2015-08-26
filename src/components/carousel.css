@@ -1,3 +1,11 @@
+/**
+ * |-- carousel
+ *     |-- carousel__navigation
+ *     |-- carousel__wrapper
+ *         |-- carousel__list
+ *             |-- carousel__item
+ */
+
 .carousel {
     position: relative;
     white-space: nowrap;

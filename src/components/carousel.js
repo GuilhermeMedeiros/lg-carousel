@@ -1,21 +1,10 @@
 import "./carousel.css"
 
-'use strict';
-
 export default class Carousel {
     constructor(config){
         this.el = document.createElement('div');
-        this.el.classList.add('carousel');
-
         this.wrapper = document.createElement('div');
-        this.wrapper.classList.add('carousel__wrapper');
-
         this.navigation = document.createElement('div');
-        this.navigation.classList.add('carousel__navigation');
-        this.navigation.innerHTML = `
-            <button class="carousel__navigationLeft" data-js="prev">‹</button>
-            <button class="carousel__navigationRight" data-js="next">›</button>
-        `
 
         this.config = config;
         this.state = {index: 0}
@@ -29,6 +18,11 @@ export default class Carousel {
         let perRow = this.config.perRow;
         let numRows = Math.ceil(items.length / perRow);
 
+        // create navigation buttons
+        this.navigation.innerHTML = `<button class="carousel__navigationLeft" data-js="prev">‹</button>
+                                    <button class="carousel__navigationRight" data-js="next">›</button>`
+
+        // create as many lists as necessary to hold {perRow} items. this allow fit of the items by using percentage
         for(let i = 0; i < numRows; i++) {
             let first = i * perRow
             let last = i * perRow + perRow
@@ -38,11 +32,18 @@ export default class Carousel {
                                 </div>`
         }
 
+        // set the html to the main wrapper that handles positioning
         this.wrapper.innerHTML = renderedListsHTML;
+
+        this.el.classList.add('carousel');
+        this.wrapper.classList.add('carousel__wrapper');
+        this.navigation.classList.add('carousel__navigation');
+
         this.el.appendChild(this.wrapper);
         this.el.appendChild(this.navigation);
-        this.delegateEvents(this.state)
-        this.transform(this.state)
+
+        this.delegateEvents()
+        this.transform()
 
         return this;
     }
@@ -54,17 +55,6 @@ export default class Carousel {
                 </div>`
     }
 
-    moveNext(e){
-        this.state.index = Math.min(this.config.items.length - this.config.perRow, this.state.index+1);;
-        this.transform();
-        this.highlight(e);
-    }
-
-    movePrev(e){
-        this.state.index = Math.max(0, this.state.index-1);
-        this.transform();
-        this.highlight(e);
-    }
 
     delegateEvents(){
         document.addEventListener('keydown', (e) => {
@@ -82,8 +72,23 @@ export default class Carousel {
         })
     }
 
+     moveNext(e){
+        // do not pass the index limit, which is {total amount of items} - {items per row}
+        this.state.index = Math.min(this.config.items.length - this.config.perRow, this.state.index+1);;
+        this.transform();
+        this.highlight(e);
+    }
+
+    movePrev(e){
+        this.state.index = Math.max(0, this.state.index-1);
+        this.transform();
+        this.highlight(e);
+    }
+
     transform(){
-        this.wrapper.style.transform = `translate3d(-${100/this.config.perRow*this.state.index}%, 0, 0)`;
+        // note: because each list has the same width of the carousel visible overflow,
+        // we can easily extract a percentage by multiplying the current index with the size (in percentage) of each item
+        this.wrapper.style.transform = `translate3d(-${100 / this.config.perRow * this.state.index}%, 0, 0)`;
     }
 
     highlight(e){
